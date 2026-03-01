@@ -64,7 +64,6 @@ export function SessionAlert() {
 
     if (capabilities.hasAuth && !settings.hasDismissedGuestLendingAlert && !settings.allowGuestLending && !isGuest) {
         return (
-
             <Item variant="outline" size='sm'>
                 <ItemContent>
                     <ItemTitle><strong>Tip:</strong> Guest Lending</ItemTitle>

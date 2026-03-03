@@ -755,7 +755,10 @@ export class MediaService {
     const auth = await AuthService.getEffectiveCredentials(session);
     const provider = getMediaProvider(auth.provider);
     const { value, timedOut } = await MediaService.withFilterTimeout(provider.getYears(auth));
-    if (timedOut || !value || value.length === 0) return { data: staticYears, timedOut };
+    if (timedOut || !value || value.length === 0) {
+      logger.debug("[MediaService.getYears] Serving static year filters")
+      return { data: staticYears, timedOut };
+    }
     return { data: value, timedOut: false };
   }
 
@@ -774,7 +777,10 @@ export class MediaService {
     }
 
     const { value, timedOut } = await MediaService.withFilterTimeout(provider.getRatings(auth));
-    if (timedOut || !value || value.length === 0) return { data: staticRatings, timedOut };
+    if (timedOut || !value || value.length === 0) {
+      logger.debug("[MediaService.getRatings] Serving static maturity rating filters")
+      return { data: staticRatings, timedOut };
+    }
     return { data: value as { Name: string; Value: string }[], timedOut: false };
   }
 
@@ -787,7 +793,10 @@ export class MediaService {
     const auth = await AuthService.getEffectiveCredentials(session);
     const provider = getMediaProvider(auth.provider);
     const { value, timedOut } = await MediaService.withFilterTimeout(provider.getGenres(auth));
-    if (timedOut || !value || value.length === 0) return { data: DEFAULT_GENRES, timedOut };
+    if (timedOut || !value || value.length === 0) {
+      logger.debug("[MediaService.getGenres] Serving static genres filters")
+      return { data: DEFAULT_GENRES, timedOut };
+    }
     return { data: value, timedOut: false };
   }
 

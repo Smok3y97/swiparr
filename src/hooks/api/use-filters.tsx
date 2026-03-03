@@ -9,6 +9,8 @@ import { MediaGenre, MediaRating, MediaYear } from "@/types/media";
 import { QUERY_KEYS } from "./query-keys";
 import { DEFAULT_GENRES, DEFAULT_RATINGS, DEFAULT_THEMES } from "@/lib/constants";
 import { getRuntimeConfig } from "@/lib/runtime-config";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const STATIC_FILTERS_README_URL =
   "https://github.com/m3sserstudi0s/swiparr?tab=readme-ov-file#environment-variable-matrix";
@@ -19,17 +21,15 @@ function useFilterTimeoutToast(timedOut: boolean) {
     if (timedOut && !toastShown.current) {
       toastShown.current = true;
       toast.warning("Filter loading timed out", {
-        description: "Static filters are being used. For large libraries, consider enabling USE_STATIC_FILTERS.",
+        description: "Static filters are being used. For large libraries, consider defaulting to static filters.",
         duration: 10_000,
         action: (
-          <a
-            href={STATIC_FILTERS_README_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1"
-          >
-            See <ExternalLink className="h-3 w-3" />
-          </a>
+          <Link href={STATIC_FILTERS_README_URL} target="_blank" rel="noopener noreferrer">
+            <Button>
+              See
+              <ExternalLink className="h-3 w-3" />
+            </Button>
+          </Link>
         ),
       });
     }

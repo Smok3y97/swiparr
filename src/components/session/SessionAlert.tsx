@@ -67,7 +67,6 @@ export function SessionAlert() {
 
     if (capabilities.hasAuth && !settings.hasDismissedGuestLendingAlert && !settings.allowGuestLending && !isGuest) {
         return (
-
             <Item variant="outline" size='sm'>
                 <ItemContent>
                     <ItemTitle>{t.rich('guestLendingTipTitle', { bold: (chunks) => <strong>{chunks}</strong> })}</ItemTitle>
